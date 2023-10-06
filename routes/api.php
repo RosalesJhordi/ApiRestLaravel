@@ -20,7 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //cliente
 Route::get('/Clientes','App\Http\Controllers\ClienteController@index');
-
 Route::post('/Clientes','App\Http\Controllers\ClienteController@store');
 Route::get('/Clientes/{cliente}','App\Http\Controllers\ClienteController@show');
 Route::put('/Clientes/{cliente}','App\Http\Controllers\ClienteController@update');
@@ -28,8 +27,9 @@ Route::delete('/Clientes/{cliente}','App\Http\Controllers\ClienteController@dest
 
 //servicios
 Route::get('/Servicios','App\Http\Controllers\ServiciosController@index');
-
 Route::post('/Servicios','App\Http\Controllers\ServiciosController@store');
 Route::get('/Servicios/{servicio}','App\Http\Controllers\ServiciosController@show');
 Route::put('/Servicios/{servicio}','App\Http\Controllers\ServiciosController@update');
 Route::delete('/Servicios/{servicio}','App\Http\Controllers\ServiciosController@destroy');
+
+Route::post('/Clientes/servicio','App\Http\Controllers\ClienteController@attach');
