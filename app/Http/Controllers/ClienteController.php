@@ -32,6 +32,19 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         //
+        $cliente = new Cliente;
+        $cliente->name = $request->name;
+        $cliente->apellidos = $request->apellidos;
+        $cliente->telefono = $request->telefono;
+        $cliente->email = $request->email;
+        $cliente->password = $request->password;
+        $data = [
+            'message' => 'Cliente creado con exito',
+            'cliente' => $cliente
+        ];
+        $cliente->save();
+
+        return response()->json($data);
     }
 
     /**
@@ -40,6 +53,13 @@ class ClienteController extends Controller
     public function show(Cliente $cliente)
     {
         //
+        // $cliente = Cliente::find($cliente->id);
+        // if(!$cliente){
+        //     return response()->json([
+        //         'message' => 'El cliente no existe'
+        //     ]);
+        // }
+        return response()->json($cliente);
     }
 
     /**
@@ -55,7 +75,17 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        $cliente->name = $request->name;
+        $cliente->apellidos = $request->apellidos;
+        $cliente->telefono = $request->telefono;
+        $cliente->email = $request->email;
+        $cliente->password = $request->password;
+        $cliente->save();
+        $data = [
+            'message' => 'Cliente actualizado con exito',
+            'cliente' => $cliente
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -64,5 +94,12 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+        $cliente->delete();
+        $data = [
+            'message' => 'Cliente eliminado con exito',
+            'cliente' => $cliente
+        ];
+        
+        return response()->json($data);
     }
 }
