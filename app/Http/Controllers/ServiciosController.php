@@ -99,4 +99,14 @@ class ServiciosController extends Controller
         
         return response()->json($data);
     }
+    public function clientes(Request $request){
+        $servi = Servicios::find($request->servicio_id);
+        $clientes = $servi->clientes;
+        $data = [
+            'message' => 'Clientes',
+            'clientes' => $clientes
+        ];
+        return response()->json($data);
+
+    }
 }

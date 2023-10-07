@@ -33,3 +33,6 @@ Route::put('/Servicios/{servicio}','App\Http\Controllers\ServiciosController@upd
 Route::delete('/Servicios/{servicio}','App\Http\Controllers\ServiciosController@destroy');
 
 Route::post('/Clientes/servicio','App\Http\Controllers\ClienteController@attach');
+Route::post('/Clientes/servicio/detach','App\Http\Controllers\ClienteController@detach');
+
+Route::post('/Servicios/Clientes','App\Http\Controllers\ServiciosController@clientes');

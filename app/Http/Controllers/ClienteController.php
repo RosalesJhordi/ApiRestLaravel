@@ -14,8 +14,20 @@ class ClienteController extends Controller
     {
         //
         $clientes = Cliente::all();
+        $array = [];
+        foreach ($clientes as $client){
+            $array[] = [
+                'id' => $client->id,
+                'name' => $client->name,
+                'apellidos' => $client->apellidos,
+                'telefono' => $client->telefono,
+                'email' => $client->email,
+                'password' => $client->password,
+                'servicios' => $client->servicios,
+            ];
+        }
         //return $clientes to json response
-        return response()->json($clientes);
+        return response()->json($array);
     }
 
     /**
@@ -52,14 +64,12 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
-        // $cliente = Cliente::find($cliente->id);
-        // if(!$cliente){
-        //     return response()->json([
-        //         'message' => 'El cliente no existe'
-        //     ]);
-        // }
-        return response()->json($cliente);
+        $data =[
+            'message' => 'detalles de cliente',
+            'cliente' => $cliente,
+            'servicios' => $cliente->servicios
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -105,11 +115,25 @@ class ClienteController extends Controller
 
     public function attach(Request $request){
         $cliente = Cliente::find($request->cliente_id);
-        $cliente->Servicios()->attach($request->servicio_id);
+        $cliente->servicios()->attach($request->servicio_id);
+    
         $data = [
-            'message' => 'servicio adjuntado',
+            'message' => 'Servicio adjuntado',
             'cliente' => $cliente
         ];
+    
         return response()->json($data);
     }
+    public function detach(Request $request){
+        $cliente = Cliente::find($request->cliente_id);
+        $cliente->servicios()->detach($request->servicio_id);
+    
+        $data = [
+            'message' => 'Servicio quitado',
+            'cliente' => $cliente
+        ];
+    
+        return response()->json($data);
+    }
+    
 }
