@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +37,6 @@ Route::post('/Clientes/servicio','App\Http\Controllers\ClienteController@attach'
 Route::post('/Clientes/servicio/detach','App\Http\Controllers\ClienteController@detach');
 
 Route::post('/Servicios/Clientes','App\Http\Controllers\ServiciosController@clientes');
+
+Route::post('Registro',[AuthController::class,'register']);
+Route::post('Login',[AuthController::class,'login']);

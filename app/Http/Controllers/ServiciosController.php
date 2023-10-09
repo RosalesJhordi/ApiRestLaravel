@@ -12,7 +12,23 @@ class ServiciosController extends Controller
      */
     public function index()
     {
-        //
+        $servicios = Servicios::all();
+        $array = [];
+        foreach ($servicios as $servicio){
+            $array[] = [
+                'id' => $servicio->id,
+                'nombre' => $servicio->nombre,
+                'ubicacion' => $servicio->ubicacion,
+                'clima' => $servicio->clima,
+                'descripcion' => $servicio->descripcion,
+                'horario' => $servicio->horario,
+                'imagen' => $servicio->imagen,
+                'costo' => $servicio->costo,
+                'descuento' => $servicio->descuento,
+            ];
+        }
+        //return $clientes to json response
+        return response()->json($array);
     }
 
     /**

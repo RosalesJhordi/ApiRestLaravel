@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('ubicacion');
             $table->string('clima');
             $table->string('descripcion');
-            $table->string('horario');
+            $table->dateTime('horario');
             $table->string('imagen');
-            $table->double('costo');
-            $table->double('descuento');
+            $table->integer('costo');
+            $table->integer('descuento');
             $table->timestamps();
         });
     }

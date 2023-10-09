@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
@@ -97,7 +98,6 @@ class ClienteController extends Controller
         ];
         return response()->json($data);
     }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -135,5 +135,4 @@ class ClienteController extends Controller
     
         return response()->json($data);
     }
-    
 }
