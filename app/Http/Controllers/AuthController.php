@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +24,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Error de validación', 'errors' => $validator->errors()], 422);
         }
 
-        $cliente = Cliente::create([
+        $cliente = User::create([
             'name' => $request->input('name'),
             'apellidos' => $request->input('apellidos'),
             'telefono' => $request->input('telefono'),
@@ -48,13 +48,9 @@ class AuthController extends Controller
             return response()->json(['message' => 'No autorizado'], 401);
         }
 
-        $user = Cliente::where('email', $request['email'])->firstOrFail();
+        $user = User::where('email', $request['email'])->firstOrFail();
 
-        if (!Hash::check($request->input('password'), $user->password)) {
-            return response()->json(['message' => 'No autorizado'], 401);
-        }
-
-        $token = $user->createToken('auth-token')->plainTextToken;
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'message' => 'Hola ' . $user->name,
@@ -62,5 +58,12 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
             'user' => $user,
         ]);
+    }
+    public function logout(){
+        auth()->user()->tokens()->delete();
+
+        return [
+            'message' => 'Sesion cerrada con exito'
+        ];
     }
 }

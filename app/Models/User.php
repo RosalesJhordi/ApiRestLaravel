@@ -11,18 +11,19 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
+    use HasApiTokens;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    public function servicios(){
+        return $this->belongsToMany(Servicios::class,'clientes_services', 'cliente_id', 'servicio_id');
+    }
     protected $fillable = [
         'name',
+        'apellidos',
+        'telefono',
         'email',
         'password',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *

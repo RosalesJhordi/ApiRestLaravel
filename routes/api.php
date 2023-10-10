@@ -40,3 +40,7 @@ Route::post('/Servicios/Clientes','App\Http\Controllers\ServiciosController@clie
 
 Route::post('Registro',[AuthController::class,'register']);
 Route::post('Login',[AuthController::class,'login']);
+
+Route::middleware(['auth:sanctum'])->group(function(){
+    Route::post('Logout',[AuthController::class,'logout']);
+});
