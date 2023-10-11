@@ -14,10 +14,9 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
-        $clientes = User::all();
+        $user = User::all();
         $array = [];
-        foreach ($clientes as $client){
+        foreach ($user as $client){
             $array[] = [
                 'id' => $client->id,
                 'name' => $client->name,
@@ -25,7 +24,6 @@ class ClienteController extends Controller
                 'telefono' => $client->telefono,
                 'email' => $client->email,
                 'password' => $client->password,
-                'servicios' => $client->servicios,
             ];
         }
         //return $clientes to json response

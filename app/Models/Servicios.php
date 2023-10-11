@@ -11,4 +11,15 @@ class Servicios extends Model
     public function clientes(){
         return $this->belongsToMany(User::class,'clientes_services','servicio_id');
     }
+
+    protected $fillable = [
+        'nombre',
+        'ubicacion',
+        'clima',
+        'descripcion',
+        'horario',
+        'imagen',
+        'costo',
+        'descuento'
+    ];
 }
