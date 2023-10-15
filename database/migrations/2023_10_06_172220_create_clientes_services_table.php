@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('servicio_id')->references('id')->on('servicios');
+            $table->string('asiento');
             $table->timestamps();
         });
     }

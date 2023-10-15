@@ -34,6 +34,27 @@ class ServiciosController extends Controller
         return response()->json($array);
     }
 
+    public function welc(){
+        $servicios = Servicios::all();
+        $array = [];
+        foreach ($servicios as $servicio){
+            $array[] = [
+                'id' => $servicio->id,
+                'nombre' => $servicio->nombre,
+                'ubicacion' => $servicio->ubicacion,
+                'clima' => $servicio->clima,
+                'descripcion' => $servicio->descripcion,
+                'horario' => $servicio->horario,
+                'imagen' => $servicio->imagen,
+                'costo' => $servicio->costo,
+                'descuento' => $servicio->descuento,
+            ];
+        }
+        //return $clientes to json response
+        $data = $array;
+        return view('welcome', compact('data'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -144,6 +165,6 @@ class ServiciosController extends Controller
         $lugar = $request->input('lugar');
 
         
-        return response()->json(['message' => 'Datos recibidos y procesados correctamente en la API']);
+        return response()->json(['message' => $lugar]);
     }
 }
